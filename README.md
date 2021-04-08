@@ -1,0 +1,1 @@
+```npm start``` to start both the publish and subscriber server
