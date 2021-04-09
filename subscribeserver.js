@@ -16,18 +16,14 @@ app1.use(bodyParser.json());
 app1.use(express.urlencoded({ extended: false }));
 app1.use(cookieParser());
 
-subscriber.on("message",(channel,message) => {
-    console.log("Received data :"+message);
-})
-
 app1.post('/subscribe/:topic',(req,res) => {
     // console.log("params",req.params)
     let url = req.body.url;
 
     let topic = req.params.topic;
     //    validate the body payload
-    console.log(topic)
-
+    // console.log(topic)
+    
     if (url === undefined && topic == undefined) {
         // send a bad request response
 
@@ -35,6 +31,9 @@ app1.post('/subscribe/:topic',(req,res) => {
 
     } 
     // console.log("code got here"
+    subscriber.on("message",(channel,message) => {
+        console.log("Received data :"+message);
+    })
     
     let token = subscriber.subscribe(topic);
     if (token) {
